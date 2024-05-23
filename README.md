@@ -19,11 +19,11 @@ For more command help, please see `tea help`.
 Linux / amd64:
 
 ```bash
-sudo rm -f /usr/local/bin/tea && sudo wget https://mirror.ghproxy.com/https://github.com/codemutex/termisphere-agent/releases/latest/download/tea_linux_amd64 -O /usr/local/bin/tea && sudo chmod +x /usr/local/bin/tea
+PREFIX=/usr/local/bin sudo sh -c "if [ -f $PREFIX/tea ]; then rm -f $PREFIX/tea; fi; wget https://mirror.ghproxy.com/https://github.com/codemutex/termisphere-agent/releases/latest/download/tea_linux_amd64 -O $PREFIX/tea && chmod +x $PREFIX/tea"
 ```
 
 Linux / arm64:
 
 ```bash
-sudo rm -f /usr/local/bin/tea && sudo wget https://mirror.ghproxy.com/https://github.com/codemutex/termisphere-agent/releases/latest/download/tea_linux_arm64 -O /usr/local/bin/tea && sudo chmod +x /usr/local/bin/tea
+PREFIX=/usr/local/bin sudo sh -c "if [ -f $PREFIX/tea ]; then rm -f $PREFIX/tea; fi; wget https://mirror.ghproxy.com/https://github.com/codemutex/termisphere-agent/releases/latest/download/tea_linux_arm64 -O $PREFIX/tea && chmod +x $PREFIX/tea"
 ```
