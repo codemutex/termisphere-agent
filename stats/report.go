@@ -30,10 +30,11 @@ func Fetch(d time.Duration, req Request) (res SystemStats, err error) {
 	}
 
 	if req.CPU {
+	if req.Cpu {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			res.CPU, err = CPU(d)
+			res.Cpu, err = Cpu(d)
 		}()
 	}
 
@@ -79,6 +80,7 @@ type Request struct {
 	Platform    bool
 	Hostname    bool
 	CPU         bool
+	Cpu         bool
 	Memory      bool
 	BlockDevice bool
 	Filesystem  bool
@@ -90,6 +92,7 @@ type SystemStats struct {
 	Platform    string             `json:"platform,omitempty"`
 	Hostname    string             `json:"hostname,omitempty"`
 	CPU         []CpuStats         `json:"cpu,omitempty"`
+	Cpu         []CpuStats         `json:"cpu,omitempty"`
 	Memory      *MemoryStats       `json:"memory,omitempty"`
 	BlockDevice []BlockDeviceStats `json:"block_device,omitempty"`
 	Filesystem  []FilesystemStats  `json:"filesystem,omitempty"`
@@ -97,14 +100,12 @@ type SystemStats struct {
 }
 
 type CpuStats struct {
-	US uint64 `json:"us"`
-	SY uint64 `json:"sy"`
-	NI uint64 `json:"ni"`
-	ID uint64 `json:"id"`
-	WA uint64 `json:"wa"`
-	HI uint64 `json:"hi"`
-	SI uint64 `json:"si"`
-	ST uint64 `json:"st"`
+	User   uint64 `json:"user"`
+	System uint64 `json:"system"`
+	Idle   uint64 `json:"idle"`
+	Wait   uint64 `json:"wait"`
+	Steal  uint64 `json:"steal"`
+	Sum    uint64 `json:"sum"`
 }
 
 type MemoryStats struct {

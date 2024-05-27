@@ -7,6 +7,6 @@ import (
 	"time"
 )
 
-func CPU(d time.Duration) ([]CpuStats, error) {
+func Cpu(d time.Duration) ([]CpuStats, error) {
 	return nil, errors.New("platform not supported")
 }

@@ -122,6 +122,7 @@ func main() {
 				Platform:    all || platform,
 				Hostname:    all || hostname,
 				CPU:         all || cpu,
+				Cpu:         all || cpu,
 				Memory:      all || memory,
 				BlockDevice: all || blockDevice,
 				Filesystem:  all || filesystem,
