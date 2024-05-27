@@ -22,6 +22,13 @@ func Fetch(d time.Duration, req Request) (res SystemStats, err error) {
 		}
 	}
 
+	if req.Distro {
+		res.Distro, err = Distro()
+		if err != nil {
+			return SystemStats{}, err
+		}
+	}
+
 	if req.Hostname {
 		res.Hostname, err = Hostname()
 		if err != nil {
@@ -29,7 +36,13 @@ func Fetch(d time.Duration, req Request) (res SystemStats, err error) {
 		}
 	}
 
-	if req.CPU {
+	if req.Uptime {
+		res.Uptime, err = Uptime()
+		if err != nil {
+			return SystemStats{}, err
+		}
+	}
+
 	if req.Cpu {
 		wg.Add(1)
 		go func() {
@@ -78,8 +91,9 @@ func Fetch(d time.Duration, req Request) (res SystemStats, err error) {
 type Request struct {
 	Arch        bool
 	Platform    bool
+	Distro      bool
 	Hostname    bool
-	CPU         bool
+	Uptime      bool
 	Cpu         bool
 	Memory      bool
 	BlockDevice bool
@@ -90,8 +104,9 @@ type Request struct {
 type SystemStats struct {
 	Arch        string             `json:"arch,omitempty"`
 	Platform    string             `json:"platform,omitempty"`
+	Distro      string             `json:"distro,omitempty"`
 	Hostname    string             `json:"hostname,omitempty"`
-	CPU         []CpuStats         `json:"cpu,omitempty"`
+	Uptime      uint64             `json:"uptime,omitempty"`
 	Cpu         []CpuStats         `json:"cpu,omitempty"`
 	Memory      *MemoryStats       `json:"memory,omitempty"`
 	BlockDevice []BlockDeviceStats `json:"block_device,omitempty"`

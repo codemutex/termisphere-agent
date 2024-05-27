@@ -88,7 +88,9 @@ func main() {
 		Flags: []cli.Flag{
 			&cli.BoolFlag{Name: "arch", Usage: "report arch info"},
 			&cli.BoolFlag{Name: "platform", Usage: "report platform info"},
+			&cli.BoolFlag{Name: "distro", Usage: "report distro info"},
 			&cli.BoolFlag{Name: "hostname", Usage: "report hostname info"},
+			&cli.BoolFlag{Name: "uptime", Usage: "report uptime stats"},
 			&cli.BoolFlag{Name: "cpu", Usage: "report cpu stats"},
 			&cli.BoolFlag{Name: "memory", Usage: "report memory stats"},
 			&cli.BoolFlag{Name: "block-device", Usage: "report block device stats"},
@@ -100,7 +102,9 @@ func main() {
 		Action: func(c *cli.Context) error {
 			arch := c.Bool("arch")
 			platform := c.Bool("platform")
+			distro := c.Bool("distro")
 			hostname := c.Bool("hostname")
+			uptime := c.Bool("uptime")
 			cpu := c.Bool("cpu")
 			memory := c.Bool("memory")
 			blockDevice := c.Bool("block-device")
@@ -120,8 +124,9 @@ func main() {
 			if res, err := stats.Fetch(d, stats.Request{
 				Arch:        all || arch,
 				Platform:    all || platform,
+				Distro:      all || distro,
 				Hostname:    all || hostname,
-				CPU:         all || cpu,
+				Uptime:      all || uptime,
 				Cpu:         all || cpu,
 				Memory:      all || memory,
 				BlockDevice: all || blockDevice,

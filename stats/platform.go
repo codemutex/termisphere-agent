@@ -13,9 +13,17 @@ func Arch() (string, error) {
 }
 
 func Platform() (string, error) {
-	return "darwin", nil
+	return "", nil
+}
+
+func Distro() (string, error) {
+	return "", nil
 }
 
 func Hostname() (string, error) {
 	return os.Hostname()
+}
+
+func Uptime() (uint64, error) {
+	return 0, nil
 }
